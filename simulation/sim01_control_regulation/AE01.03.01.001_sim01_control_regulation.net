@@ -1,0 +1,9 @@
+*control regulation
+.include ../AE01.03.01.001.cir
+.param VCC=30
+.param Rs1=0.284
+.param Rs2=0.284
+.step param VDIMM list 0.5 2.5
+.param x_base=.3m
+.tran 0 {x_base} 0 uic startup
+.backanno

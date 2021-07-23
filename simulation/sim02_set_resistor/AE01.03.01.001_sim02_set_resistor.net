@@ -1,0 +1,9 @@
+*set resistor
+.include ../AE01.03.01.001.cir
+.param VCC=30
+.step param Rs1 list 0.284 0.402 0.569
+.param Rs2=Rs1
+.param VDIMM=2.5
+.param x_base=.3m
+.tran 0 {x_base} 0 uic startup
+.backanno

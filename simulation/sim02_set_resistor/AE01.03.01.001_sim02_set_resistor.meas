@@ -1,0 +1,83 @@
+*
+*time reference
+.meas tref1 find time when V(/a,/k)=V(/sw) cross=79
+.meas tref2 find time when V(/a,/k)=V(/sw) cross=80
+.meas tref3 find time when V(/a,/k)=V(/sw) cross=81
+*
+*frequency and duty
+.meas freq_sw param (1/(tref3-tref1))
+.meas time_cycle param (1/freq_sw)
+.meas time_duty param (tref2-tref1)
+.meas %_duty param ((time_duty*100)/time_cycle)
+*
+*load
+.meas voltage_max_load max V(/a,/k) from=tref1 to=tref3
+.meas voltage_min_load min V(/a,/k) from=tref1 to=tref3
+.meas voltage_rms_load rms V(/a,/k) from=tref1 to=tref3
+.meas current_max_load max I(D201)+I(D209) from=tref1 to=tref3
+.meas current_min_load min I(D201)+I(D209) from=tref1 to=tref3
+.meas current_rms_load rms I(D201)+I(D209) from=tref1 to=tref3
+.meas power_max_load param voltage_max_load*current_max_load
+.meas power_min_load param voltage_min_load*current_min_load
+.meas power_rms_load param voltage_rms_load*current_rms_load
+*
+*led
+.meas voltage_max_led max V(/a,/load/1) from=tref1 to=tref3
+.meas voltage_min_led min V(/a,/load/1) from=tref1 to=tref3
+.meas voltage_rms_led rms V(/a,/load/1) from=tref1 to=tref3
+.meas current_max_led max I(D201) from=tref1 to=tref3
+.meas current_min_led min I(D201) from=tref1 to=tref3
+.meas current_rms_led rms I(D201) from=tref1 to=tref3
+.meas power_max_led param voltage_max_led*current_max_led
+.meas power_min_led param voltage_min_led*current_min_led
+.meas power_rms_led param voltage_rms_led*current_rms_led
+*
+*source
+.meas current_max_source max -I(V101) from=tref1 to=tref3
+.meas current_min_source min -I(V101) from=tref1 to=tref3
+.meas current_rms_source rms -I(V101) from=tref1 to=tref3
+.meas power_max_source param current_max_source*V(vcc)
+.meas power_min_source param current_min_source*V(vcc)
+.meas power_rms_source param current_rms_source*V(vcc)
+*
+*set resistor (1 resistor)
+.meas voltage_max_sense max V(vcc,/a) from=tref1 to=tref3
+.meas voltage_min_sense min V(vcc,/a) from=tref1 to=tref3
+.meas voltage_rms_sense rms V(vcc,/a) from=tref1 to=tref3
+.meas current_max_rset max I(R101) from=tref1 to=tref3
+.meas current_min_rset min I(R101) from=tref1 to=tref3
+.meas current_rms_rset rms I(R101) from=tref1 to=tref3
+.meas power_max_rset param current_max_rset*voltage_max_sense
+.meas power_min_rset param current_min_rset*voltage_min_sense
+.meas power_rms_rset param current_rms_rset*voltage_rms_sense
+*
+*freewheel diode
+.meas voltage_max_diode max V(vcc,/sw) from=tref1 to=tref3
+.meas voltage_min_diode min V(vcc,/sw) from=tref1 to=tref3
+.meas voltage_rms_diode rms V(vcc,/sw) from=tref1 to=tref3
+.meas current_max_diode max -I(D101) from=tref1 to=tref3
+.meas current_min_diode min -I(D101) from=tref1 to=tref3
+.meas current_rms_diode rms -I(D101) from=tref1 to=tref3
+.meas power_max_diode param current_max_diode*voltage_max_diode
+.meas power_min_diode param current_min_diode*voltage_min_diode
+.meas power_rms_diode param current_rms_diode*voltage_rms_diode
+*
+*inductor
+.meas voltage_max_inductor max V(/sw,/k) from=tref1 to=tref3
+.meas voltage_min_inductor min V(/sw,/k) from=tref1 to=tref3
+.meas voltage_rms_inductor rms V(/sw,/k) from=tref1 to=tref3
+.meas current_max_inductor max -I(L101) from=tref1 to=tref3
+.meas current_min_inductor min -I(L101) from=tref1 to=tref3
+.meas current_rms_inductor rms -I(L101) from=tref1 to=tref3
+.meas power_max_inductor param current_max_inductor*voltage_max_inductor
+.meas power_min_inductor param current_min_inductor*voltage_min_inductor
+.meas power_rms_inductor param current_rms_inductor*voltage_rms_inductor
+*
+*output capacitor Ix(u105:N2)
+.meas current_max_cout max Ix(u105:N2) from=tref1 to=tref3
+.meas current_min_cout min Ix(u105:N2) from=tref1 to=tref3
+.meas current_rms_cout rms Ix(u105:N2) from=tref1 to=tref3
+.meas power_max_cout param current_max_cout*voltage_max_load
+.meas power_min_cout param current_min_cout*voltage_min_load
+.meas power_rms_cout param current_rms_cout*voltage_rms_load
+*
